@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090b16" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Impostor Hint" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <title>Impostor Hint</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="logo">
+      <div class="logo-mark">🕵️</div>
+      <div><h1>Impostor Hint</h1><p>Pass-the-phone party game</p></div>
+    </div>
+    <div class="pill">Works offline</div>
+  </header>
+
+  <main>
+    <section id="setup" class="screen active">
+      <div class="card hero">
+        <h2>Find the impostor.</h2>
+        <p>Everyone gets the same secret word. One player gets only the category as a hint.</p>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Players</div>
+        <div class="grid2">
+          <div class="field">
+            <label for="players">Number of players</label>
+            <input id="players" type="number" min="3" max="20" value="4">
+          </div>
+          <div class="field">
+            <label for="impostors">Number of impostors</label>
+            <input id="impostors" type="number" min="1" max="5" value="1">
+          </div>
+        </div>
+
+        <div class="section-title">Choose a category</div>
+        <div id="categoryGrid" class="category-grid"></div>
+
+        <div class="actions">
+          <button id="startBtn" class="primary wide">Start game</button>
+          <button id="customBtn" class="secondary">Custom categories</button>
+        </div>
+        <div class="notice">Example: three players see <b>Batman</b>. One sees <b>IMPOSTOR</b> and <b>Hint: Superheroes</b>.</div>
+        <div id="testBadge" class="test-badge">✓ App logic loaded successfully</div>
+      </div>
+    </section>
+
+    <section id="custom" class="screen">
+      <div class="card">
+        <h2 style="margin-top:0">Custom categories</h2>
+        <p class="muted">Create your own category and word list. It will be saved on this device when browser storage is available.</p>
+
+        <div class="field">
+          <label for="customName">Category name</label>
+          <input id="customName" placeholder="Example: Superheroes">
+        </div>
+
+        <div class="field" style="margin-top:10px">
+          <label for="customWords">Words — one per line or separated by commas</label>
+          <textarea id="customWords" placeholder="Batman&#10;Superman&#10;Spider-Man"></textarea>
+        </div>
+
+        <div class="actions">
+          <button id="saveCustomBtn" class="primary">Save category</button>
+          <button id="customBackBtn" class="secondary">Back</button>
+        </div>
+
+        <div class="section-title">Saved categories</div>
+        <div id="savedList" class="saved-list"></div>
+      </div>
+    </section>
+
+    <section id="handoff" class="screen">
+      <div class="card pass-card">
+        <div class="eyebrow" id="handoffCount">Player 1 of 4</div>
+        <h2>Pass the phone</h2>
+        <p>Only the current player should look.</p>
+        <button id="revealBtn" class="primary wide" style="margin-top:24px">Reveal my role</button>
+      </div>
+    </section>
+
+    <section id="reveal" class="screen">
+      <div class="card reveal-card">
+        <div class="eyebrow" id="revealCount">Player 1 of 4</div>
+        <div id="roleShell" class="role-shell word">
+          <div id="roleLabel" class="role-label">Your word</div>
+          <div id="roleValue" class="role-value">Batman</div>
+          <div id="hintBox" class="hint-box">Category: Superheroes</div>
+        </div>
+        <p class="muted">Memorize it. Hide the screen before passing the phone.</p>
+        <button id="hideBtn" class="secondary wide" style="margin-top:18px">Hide and pass</button>
+      </div>
+    </section>
+
+    <section id="ready" class="screen">
+      <div class="card reveal-card">
+        <div class="ready-icon">🎭</div>
+        <h2 style="font-size:38px;margin:0 0 10px">Everyone is ready</h2>
+        <p class="muted" style="font-size:16px">Take turns giving one clue. Then discuss and vote for the impostor.</p>
+        <div class="actions" style="width:100%;margin-top:24px">
+          <button id="againBtn" class="primary">Play another round</button>
+          <button id="changeBtn" class="secondary">Change setup</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
